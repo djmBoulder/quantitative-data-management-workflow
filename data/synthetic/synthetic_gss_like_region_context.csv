@@ -1,0 +1,6 @@
+"Region Name","Region Median Income","Region Unemployment Rate","Urbanicity Index","Census Division"
+"Northeast","$78,000","4.1%",82,"Northeast"
+"Midwest","$69,000","4.4%",61,"Midwest"
+"South","$64,000","4.8%",58,"South"
+"West","$82,000","4.2%",76,"West"
+"Territories","$58,000","6.5%",45,"Context only"
