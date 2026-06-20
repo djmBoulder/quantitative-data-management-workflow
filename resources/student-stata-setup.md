@@ -75,11 +75,7 @@ In Stata, type:
 pwd
 ```
 
-For this course, you usually want the working directory to be the repository root, the main folder named something like:
-
-```text
-ibs-data-wrangling-microcredential
-```
+For this course, you usually want the working directory to be the repository root, the course repository folder that contains `README.md`.
 
 If Stata is looking in the wrong folder, relative paths such as `data/synthetic/synthetic_gss_like_person_2024.csv` will not work.
 

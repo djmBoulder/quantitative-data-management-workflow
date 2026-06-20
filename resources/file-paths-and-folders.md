@@ -13,11 +13,7 @@ The repository root is the main course folder. It is the folder that contains to
 - `assignments/`
 - `rubrics/`
 
-The repository root is usually named:
-
-```text
-ibs-data-wrangling-microcredential
-```
+The repository root is the course repository folder, the folder containing `README.md`.
 
 Most course scripts assume you are running code from this folder.
 
@@ -118,13 +114,13 @@ An absolute path starts from the top of your computer's file system.
 Mac example absolute path:
 
 ```text
-/Users/yourname/Desktop/ibs-data-wrangling-microcredential/data/synthetic/synthetic_gss_like_person_2024.csv
+/Users/yourname/Desktop/course-repository/data/synthetic/synthetic_gss_like_person_2024.csv
 ```
 
 Windows example absolute path:
 
 ```text
-C:\Users\yourname\Downloads\ibs-data-wrangling-microcredential\data\synthetic\synthetic_gss_like_person_2024.csv
+C:\Users\yourname\Downloads\course-repository\data\synthetic\synthetic_gss_like_person_2024.csv
 ```
 
 Absolute paths are fragile because they usually work only on one computer.
