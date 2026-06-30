@@ -29,7 +29,17 @@ confirm file "`region_csv'"
 
 * Import the person file.
 import delimited using "`person_csv'", clear varnames(1) case(lower) bindquote(strict)
+capture rename respondentid respondent_id
+capture rename surveyyear year
 capture rename survey_year year
+capture rename raceethnicity race_ethnicity
+capture rename maritalstatus marital_status
+capture rename employmentstatus employment_status
+capture rename householdincome household_income
+capture rename selfratedhealth self_rated_health
+capture rename physicalactivitydays physical_activity_days
+capture rename surveyweight survey_weight
+capture rename interviewmode interview_mode
 
 * Fatal checks: required variables must exist.
 foreach var in respondent_id year age gender region household_income self_rated_health physical_activity_days survey_weight {
@@ -93,6 +103,11 @@ tempfile person_data region_context merged_data
 save `person_data', replace
 
 import delimited using "`region_csv'", clear varnames(1) case(lower) bindquote(strict)
+capture rename regionname region_name
+capture rename regionmedianincome region_median_income
+capture rename regionunemploymentrate region_unemployment_rate
+capture rename urbanicityindex urbanicity_index
+capture rename censusdivision census_division
 rename region_name region_clean
 replace region_clean = lower(trim(region_clean))
 count

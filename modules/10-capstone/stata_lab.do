@@ -41,7 +41,17 @@ confirm file "`region_csv'"
 tempfile person2024 person2025 appended cleaned region_context merged analysis_ready
 
 import delimited using "`person_2024_csv'", clear varnames(1) case(lower) stringcols(_all) bindquote(strict)
+capture rename respondentid respondent_id
+capture rename surveyyear year
 capture rename survey_year year
+capture rename raceethnicity race_ethnicity
+capture rename maritalstatus marital_status
+capture rename employmentstatus employment_status
+capture rename householdincome household_income
+capture rename selfratedhealth self_rated_health
+capture rename physicalactivitydays physical_activity_days
+capture rename surveyweight survey_weight
+capture rename interviewmode interview_mode
 generate str45 source_file = "synthetic_gss_like_person_2024.csv"
 destring respondent_id year age, replace force
 count
@@ -49,7 +59,17 @@ local n_2024 = r(N)
 save `person2024', replace
 
 import delimited using "`person_2025_csv'", clear varnames(1) case(lower) stringcols(_all) bindquote(strict)
+capture rename respondentid respondent_id
+capture rename surveyyear year
 capture rename survey_year year
+capture rename raceethnicity race_ethnicity
+capture rename maritalstatus marital_status
+capture rename employmentstatus employment_status
+capture rename householdincome household_income
+capture rename selfratedhealth self_rated_health
+capture rename physicalactivitydays physical_activity_days
+capture rename surveyweight survey_weight
+capture rename interviewmode interview_mode
 generate str45 source_file = "synthetic_gss_like_person_2025.csv"
 destring respondent_id year age, replace force
 count
@@ -186,6 +206,11 @@ save `cleaned', replace
 * ---------------------------------------------------------------------------
 
 import delimited using "`region_csv'", clear varnames(1) case(lower) stringcols(_all) bindquote(strict)
+capture rename regionname region_name
+capture rename regionmedianincome region_median_income
+capture rename regionunemploymentrate region_unemployment_rate
+capture rename urbanicityindex urbanicity_index
+capture rename censusdivision census_division
 rename region_name region_key
 replace region_key = lower(trim(region_key))
 replace region_median_income = subinstr(region_median_income, "$", "", .)

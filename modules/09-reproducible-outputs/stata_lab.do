@@ -35,7 +35,17 @@ confirm file "`source_csv'"
 
 * Import the raw teaching file. The raw CSV remains unchanged.
 import delimited using "`source_csv'", clear varnames(1) case(lower) bindquote(strict)
+capture rename respondentid respondent_id
+capture rename surveyyear year
 capture rename survey_year year
+capture rename raceethnicity race_ethnicity
+capture rename maritalstatus marital_status
+capture rename employmentstatus employment_status
+capture rename householdincome household_income
+capture rename selfratedhealth self_rated_health
+capture rename physicalactivitydays physical_activity_days
+capture rename surveyweight survey_weight
+capture rename interviewmode interview_mode
 
 count
 local imported_rows = r(N)

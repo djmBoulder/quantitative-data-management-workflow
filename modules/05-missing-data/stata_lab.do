@@ -29,7 +29,17 @@ display as text "Raw data file: `raw_csv'"
 * Import the raw CSV without manual edits.
 confirm file "`raw_csv'"
 import delimited using "`raw_csv'", clear varnames(1) case(lower) bindquote(strict)
+capture rename respondentid respondent_id
+capture rename surveyyear year
 capture rename survey_year year
+capture rename raceethnicity race_ethnicity
+capture rename maritalstatus marital_status
+capture rename employmentstatus employment_status
+capture rename householdincome household_income
+capture rename selfratedhealth self_rated_health
+capture rename physicalactivitydays physical_activity_days
+capture rename surveyweight survey_weight
+capture rename interviewmode interview_mode
 
 * Track imported sample size.
 local n_imported = _N

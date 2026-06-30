@@ -39,7 +39,17 @@ tempfile p2024 p2025 appended_unique region_context weights_lookup person_for_re
 * ---------------------------------------------------------------------------
 
 import delimited using "`person_2024'", clear varnames(1) case(lower) bindquote(strict)
+capture rename respondentid respondent_id
+capture rename surveyyear year
 capture rename survey_year year
+capture rename raceethnicity race_ethnicity
+capture rename maritalstatus marital_status
+capture rename employmentstatus employment_status
+capture rename householdincome household_income
+capture rename selfratedhealth self_rated_health
+capture rename physicalactivitydays physical_activity_days
+capture rename surveyweight survey_weight
+capture rename interviewmode interview_mode
 generate source_file = "person_2024"
 generate region_clean = lower(trim(region))
 replace region_clean = "" if region_clean == "-9"
@@ -52,7 +62,17 @@ save `p2024', replace
 * ---------------------------------------------------------------------------
 
 import delimited using "`person_2025'", clear varnames(1) case(lower) bindquote(strict)
+capture rename respondentid respondent_id
+capture rename surveyyear year
 capture rename survey_year year
+capture rename raceethnicity race_ethnicity
+capture rename maritalstatus marital_status
+capture rename employmentstatus employment_status
+capture rename householdincome household_income
+capture rename selfratedhealth self_rated_health
+capture rename physicalactivitydays physical_activity_days
+capture rename surveyweight survey_weight
+capture rename interviewmode interview_mode
 generate source_file = "person_2025"
 generate region_clean = lower(trim(region))
 replace region_clean = "" if region_clean == "-9"
@@ -98,6 +118,11 @@ restore
 * ---------------------------------------------------------------------------
 
 import delimited using "`region_csv'", clear varnames(1) case(lower) bindquote(strict)
+capture rename regionname region_name
+capture rename regionmedianincome region_median_income
+capture rename regionunemploymentrate region_unemployment_rate
+capture rename urbanicityindex urbanicity_index
+capture rename censusdivision census_division
 rename region_name region_clean
 replace region_clean = lower(trim(region_clean))
 isid region_clean
