@@ -2,6 +2,9 @@
 * Purpose: build QA checks into the synthetic_gss_like workflow and report
 * fatal checks, warnings, merge diagnostics, and unresolved issues.
 * Run this do-file from the repository root.
+* Beginner note: if running interactively, run the setup block from version
+* through log using as a block before running later lines. Do not run isolated
+* lines that depend on local macros, imported data, or open logs.
 
 version 17
 clear all
@@ -19,7 +22,7 @@ capture mkdir "data/output"
 
 * Start a plain-text log for review.
 capture log close
-log using "`log_file'", text replace
+log using "logs/module-08-stata-log.txt", text replace
 
 display as text "Module 08 Stata quality assurance log"
 
@@ -103,12 +106,13 @@ tempfile person_data region_context merged_data
 save `person_data', replace
 
 import delimited using "`region_csv'", clear varnames(1) case(lower) bindquote(strict)
-capture rename regionname region_name
+capture rename regionname region_clean
+capture rename region_name region_clean
 capture rename regionmedianincome region_median_income
+capture rename region_unemploymentrate region_unemployment_rate
 capture rename regionunemploymentrate region_unemployment_rate
 capture rename urbanicityindex urbanicity_index
 capture rename censusdivision census_division
-rename region_name region_clean
 replace region_clean = lower(trim(region_clean))
 count
 local region_rows = r(N)

@@ -1,7 +1,10 @@
 # 07 Combining Datasets with Append, Joins, and Merges R Lab
 # Purpose: append person files, diagnose keys and duplicates, attach region
 # context, and document join diagnostics.
-# Run this script from the repository root or from an RStudio project at the repository root.
+# Beginner note:
+# - Run this script from the repository root with source("modules/07-combining-data/r_lab.R").
+# - If running interactively, run this setup section first so paths and folders exist.
+# - Generated files go only to data/working/, data/output/, or logs/.
 
 # Load packages used in this lab.
 if (!requireNamespace("dplyr", quietly = TRUE)) {

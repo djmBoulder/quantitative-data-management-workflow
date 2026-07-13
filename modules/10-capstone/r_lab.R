@@ -1,7 +1,10 @@
 # 10 Capstone Data Management Portfolio R Lab
 # Purpose: build one complete reproducible workflow from raw synthetic inputs
 # to an analysis-ready dataset, codebook, QA report, workflow memo, and log.
-# Run this script from the repository root or from an RStudio project at the repository root.
+# Beginner note:
+# - Run this script from the repository root with source("modules/10-capstone/r_lab.R").
+# - If running interactively, run this setup section first so paths and folders exist.
+# - Generated files go only to data/working/, data/output/, or logs/.
 
 # Load packages used in this capstone workflow.
 if (!requireNamespace("dplyr", quietly = TRUE)) {
@@ -35,6 +38,7 @@ log_file <- file.path("logs", "capstone_r_log.txt")
 
 # Create output folders if they do not already exist.
 dir.create("logs", showWarnings = FALSE, recursive = TRUE)
+dir.create(file.path("data", "working"), showWarnings = FALSE, recursive = TRUE)
 dir.create(file.path("data", "output"), showWarnings = FALSE, recursive = TRUE)
 
 # Required input files must exist before the workflow begins.

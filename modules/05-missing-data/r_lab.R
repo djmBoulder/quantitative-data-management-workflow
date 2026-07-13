@@ -1,7 +1,10 @@
 # 05 Missing Data and Analytic Sample Construction R Lab
 # Purpose: identify, recode, document, and report missing data while creating
 # transparent complete-case and analytic-sample flags.
-# Run this script from the repository root or from an RStudio project at the repository root.
+# Beginner note:
+# - Run this script from the repository root with source("modules/05-missing-data/r_lab.R").
+# - If running interactively, run this setup section first so paths and folders exist.
+# - Generated files go only to data/working/, data/output/, or logs/.
 
 # Load packages used in this lab.
 if (!requireNamespace("dplyr", quietly = TRUE)) {

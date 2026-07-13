@@ -11,6 +11,7 @@ Some checks can be supported by scripts in `code/r/`, but many require human rev
 - [ ] Run `Rscript code/r/check-course-files.R`.
 - [ ] Confirm every module from `00-orientation` through `10-capstone` has the standard files.
 - [ ] Run `Rscript code/r/run-r-lab-smoke-tests.R` as a dry run.
+- [ ] Confirm the dry run reports 11 expected module R labs and 11 present module R labs.
 - [ ] If ready, run `Rscript code/r/run-r-lab-smoke-tests.R --run`.
 - [ ] Review generated smoke-test results in `data/output/`.
 - [ ] Confirm generated QA outputs are not committed to GitHub unless intentionally approved.

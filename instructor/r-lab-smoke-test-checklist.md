@@ -24,7 +24,7 @@ Rscript code/r/check-r-dependencies.R
 
 The script reports which packages are installed and prints an `install.packages()` command for any missing packages. It does not install packages automatically.
 
-Required packages:
+Required packages for module R lab smoke tests:
 
 - [ ] `dplyr`
 - [ ] `tidyr`
@@ -34,9 +34,10 @@ Required packages:
 - [ ] `janitor`
 - [ ] `skimr`
 - [ ] `haven`
-- [ ] `openxlsx`
 
-Install missing packages with:
+The broader dependency checker also reports `openxlsx`, which is needed only when regenerating the Module 02 Excel teaching file from `code/r/create-synthetic-data.R`.
+
+Install missing course packages with:
 
 ```r
 install.packages(c(
@@ -52,7 +53,25 @@ install.packages(c(
 ))
 ```
 
-The R lab smoke-test runner also checks these packages before a full run.
+The R lab smoke-test runner checks the module lab packages before a full run and verifies that all 11 expected module `r_lab.R` files are present.
+
+## Individual Source Checks
+
+Each R lab should also run from the repository root with `source()`:
+
+```r
+source("modules/00-orientation/r_lab.R")
+source("modules/01-project-workflows/r_lab.R")
+source("modules/02-importing-data/r_lab.R")
+source("modules/03-data-documentation/r_lab.R")
+source("modules/04-cleaning-and-recoding/r_lab.R")
+source("modules/05-missing-data/r_lab.R")
+source("modules/06-reshaping-data/r_lab.R")
+source("modules/07-combining-data/r_lab.R")
+source("modules/08-quality-assurance/r_lab.R")
+source("modules/09-reproducible-outputs/r_lab.R")
+source("modules/10-capstone/r_lab.R")
+```
 
 ## Automated Smoke-Test Script
 
@@ -61,6 +80,8 @@ From the repository root, list the labs that would be tested:
 ```bash
 Rscript code/r/run-r-lab-smoke-tests.R
 ```
+
+The dry run should report 11 expected module R labs and 11 present module R labs.
 
 Run one module:
 

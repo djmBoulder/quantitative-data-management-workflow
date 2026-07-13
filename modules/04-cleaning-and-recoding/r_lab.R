@@ -1,7 +1,10 @@
 # 04 Cleaning, Typing, Labeling, and Recoding Variables R Lab
 # Purpose: clean selected synthetic_gss_like variables while preserving the
 # original source variables and documenting recode decisions.
-# Run this script from the repository root or from an RStudio project at the repository root.
+# Beginner note:
+# - Run this script from the repository root with source("modules/04-cleaning-and-recoding/r_lab.R").
+# - If running interactively, run this setup section first so paths and folders exist.
+# - Generated files go only to data/working/, data/output/, or logs/.
 
 # Load packages used in this lab.
 if (!requireNamespace("dplyr", quietly = TRUE)) {

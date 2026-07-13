@@ -149,7 +149,7 @@ For Stata:
 For R:
 
 1. Open the repository folder in RStudio, Positron, or another editor.
-2. Run `modules/00-orientation/r_lab.R` from the repository root.
+2. Run `source("modules/00-orientation/r_lab.R")` from the repository root.
 3. Confirm that the synthetic CSV is found.
 4. Confirm that `logs/module-00-r-log.txt` and `data/output/module-00-r-setup-check.txt` are created.
 

@@ -26,9 +26,9 @@ clear all
 set more off
 
 * Confirm this do-file is being run from the repository root.
-capture confirm file "README.md"
+capture confirm file "AGENTS.md"
 if _rc {
-    display as error "README.md not found."
+    display as error "AGENTS.md not found."
     display as error "Run this do-file from the repository root."
     exit 601
 }
@@ -89,7 +89,7 @@ local module_logs ///
     logs/module-04-stata-log.txt logs/module-05-stata-log.txt ///
     logs/module-06-stata-log.txt logs/module-07-stata-log.txt ///
     logs/module-08-stata-log.txt logs/module-09-stata-log.txt ///
-    logs/capstone_stata_log.txt
+    logs/module-10-stata-log.txt
 
 local smoke_copies ///
     `smoke_dir'/00-orientation-stata-log.txt `smoke_dir'/01-project-workflows-stata-log.txt ///
@@ -120,9 +120,9 @@ foreach module_id of local modules {
         display as error "Missing lab file: `lab_do'"
     }
     else {
-        * Each module lab opens and closes its own log. capture noisily do lets
-        * the smoke test continue while preserving useful output in the logs.
-        capture noisily do "`lab_do'"
+        * Each module lab opens and closes its own log. capture do lets the
+        * smoke test continue so instructors get a complete pass/fail summary.
+        capture do "`lab_do'"
         local rc = _rc
 
         * Close any log left open after an unexpected module failure.

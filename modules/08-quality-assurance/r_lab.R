@@ -1,7 +1,10 @@
 # 08 Quality Assurance and Validation Checks R Lab
 # Purpose: build QA checks into the synthetic_gss_like workflow and report
 # fatal checks, warnings, merge diagnostics, and unresolved issues.
-# Run this script from the repository root or from an RStudio project at the repository root.
+# Beginner note:
+# - Run this script from the repository root with source("modules/08-quality-assurance/r_lab.R").
+# - If running interactively, run this setup section first so paths and folders exist.
+# - Generated files go only to data/working/, data/output/, or logs/.
 
 # Load packages used in this lab.
 if (!requireNamespace("dplyr", quietly = TRUE)) {
@@ -22,6 +25,7 @@ log_file <- file.path("logs", "module-08-r-log.txt")
 
 # Create output folders if they do not already exist.
 dir.create("logs", showWarnings = FALSE, recursive = TRUE)
+dir.create(file.path("data", "working"), showWarnings = FALSE, recursive = TRUE)
 dir.create(file.path("data", "output"), showWarnings = FALSE, recursive = TRUE)
 
 # Fatal checks: required files must exist.

@@ -2,6 +2,9 @@
 * Purpose: clean selected synthetic_gss_like variables while preserving the
 * original source variables and documenting recode decisions.
 * Run this do-file from the repository root.
+* Beginner note: if running interactively, run the setup block from version
+* through log using as a block before running later lines. Do not run isolated
+* lines that depend on local macros, imported data, or open logs.
 
 version 17
 clear all
@@ -20,7 +23,7 @@ capture mkdir "data/output"
 
 * Start a plain-text log for review.
 capture log close
-log using "`log_file'", text replace
+log using "logs/module-04-stata-log.txt", text replace
 
 display as text "Module 04 Stata cleaning and recoding log"
 display as text "Raw data file: `raw_csv'"

@@ -28,6 +28,8 @@ Run `run-r-lab-smoke-tests.R` first as a dry run:
 Rscript code/r/run-r-lab-smoke-tests.R
 ```
 
+The dry run verifies that all 11 expected module `r_lab.R` files are present.
+
 Then run all R labs only when you are ready for generated files to be created in ignored folders:
 
 ```sh
@@ -38,4 +40,10 @@ To run one module:
 
 ```sh
 Rscript code/r/run-r-lab-smoke-tests.R --run --module=03-data-documentation
+```
+
+Individual module labs should also run from the repository root with `source()`, for example:
+
+```r
+source("modules/03-data-documentation/r_lab.R")
 ```

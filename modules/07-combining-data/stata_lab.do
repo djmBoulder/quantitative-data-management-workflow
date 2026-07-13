@@ -2,6 +2,9 @@
 * Purpose: append person files, diagnose keys and duplicates, attach region
 * context, and document merge diagnostics.
 * Run this do-file from the repository root.
+* Beginner note: if running interactively, run the setup block from version
+* through log using as a block before running later lines. Do not run isolated
+* lines that depend on local macros, imported data, or open logs.
 
 version 17
 clear all
@@ -23,7 +26,7 @@ capture mkdir "data/output"
 
 * Start a plain-text log for review.
 capture log close
-log using "`log_file'", text replace
+log using "logs/module-07-stata-log.txt", text replace
 
 display as text "Module 07 Stata combining data log"
 
@@ -118,12 +121,13 @@ restore
 * ---------------------------------------------------------------------------
 
 import delimited using "`region_csv'", clear varnames(1) case(lower) bindquote(strict)
-capture rename regionname region_name
+capture rename regionname region_clean
+capture rename region_name region_clean
 capture rename regionmedianincome region_median_income
+capture rename region_unemploymentrate region_unemployment_rate
 capture rename regionunemploymentrate region_unemployment_rate
 capture rename urbanicityindex urbanicity_index
 capture rename censusdivision census_division
-rename region_name region_clean
 replace region_clean = lower(trim(region_clean))
 isid region_clean
 duplicates report region_clean

@@ -1,6 +1,9 @@
 * 01 Project Workflows and Reproducibility Stata Lab
 * Purpose: create a simple reproducible workflow from raw CSV to working Stata data.
 * Run this do-file from the repository root.
+* Beginner note: if running interactively, run the setup block from version
+* through log using as a block before running later lines. Do not run isolated
+* lines that depend on local macros, imported data, or open logs.
 
 version 17
 clear all
@@ -19,7 +22,7 @@ capture mkdir "data/output"
 
 * Start a plain-text log so the workflow output can be reviewed later.
 capture log close
-log using "`log_file'", text replace
+log using "logs/module-01-stata-log.txt", text replace
 
 display as text "Module 01 Stata workflow log"
 display as text "Raw data file: `raw_csv'"
@@ -29,7 +32,20 @@ display as text "Working data file: `working_dta'"
 confirm file "`raw_csv'"
 
 * Import the raw CSV without editing it manually.
-import delimited using "`raw_csv'", clear varnames(1) bindquote(strict)
+import delimited using "`raw_csv'", clear varnames(1) case(lower) bindquote(strict)
+
+* Standardize imported names that Stata creates from spaced or punctuated CSV headers.
+capture rename respondentid respondent_id
+capture rename surveyyear year
+capture rename survey_year year
+capture rename raceethnicity race_ethnicity
+capture rename maritalstatus marital_status
+capture rename employmentstatus employment_status
+capture rename householdincome household_income
+capture rename selfratedhealth self_rated_health
+capture rename physicalactivitydays physical_activity_days
+capture rename surveyweight survey_weight
+capture rename interviewmode interview_mode
 
 * Inspect the imported data structure.
 describe

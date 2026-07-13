@@ -75,9 +75,17 @@ In RStudio, common options include:
 - Source the full script.
 - Restart R, then run all code again.
 
+From the R console, you can run a whole lab from the repository root with `source()`:
+
+```r
+source("modules/00-orientation/r_lab.R")
+```
+
+Each lab creates the generated folders it needs. Generated files should go to `data/working/`, `data/output/`, or `logs/`.
+
 ## Installing Packages
 
-Packages add functions to R. Some course labs use packages such as:
+Packages add functions to R. Some course labs and helper scripts use packages such as:
 
 - `dplyr`
 - `tidyr`
@@ -190,7 +198,7 @@ Start with Module 00:
 
 1. Open the repository folder in RStudio or Positron.
 2. Open `modules/00-orientation/r_lab.R`.
-3. Run the full script.
+3. Run the full script from the repository root, or run `source("modules/00-orientation/r_lab.R")` in the console.
 4. Check that R found `data/synthetic/synthetic_gss_like_person_2024.csv`.
 5. Check that the lab created:
    - `logs/module-00-r-log.txt`

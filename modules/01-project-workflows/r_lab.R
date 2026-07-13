@@ -1,6 +1,9 @@
 # 01 Project Workflows and Reproducibility R Lab
 # Purpose: create a simple reproducible workflow from raw CSV to working R data.
-# Run this script from the repository root or from an RStudio project opened at the repository root.
+# Beginner note:
+# - Run this script from the repository root with source("modules/01-project-workflows/r_lab.R").
+# - If running interactively, run this setup section first so paths and folders exist.
+# - Generated files go only to data/working/, data/output/, or logs/.
 
 # Store project-relative paths in objects so they are easy to reuse.
 raw_csv <- file.path("data", "synthetic", "synthetic_gss_like_person_2024.csv")

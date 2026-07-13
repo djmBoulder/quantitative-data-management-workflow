@@ -2,7 +2,10 @@
 # Purpose: create an analysis-ready handoff package from synthetic survey data,
 # including datasets, a summary table, a derived codebook, a workflow log,
 # and a handoff memo.
-# Run this script from the repository root or from an RStudio project at the repository root.
+# Beginner note:
+# - Run this script from the repository root with source("modules/09-reproducible-outputs/r_lab.R").
+# - If running interactively, run this setup section first so paths and folders exist.
+# - Generated files go only to data/working/, data/output/, or logs/.
 
 # Load packages used in this lab.
 if (!requireNamespace("dplyr", quietly = TRUE)) {
@@ -33,6 +36,7 @@ log_file <- file.path("logs", "module-09-r-log.txt")
 
 # Create output folders if they do not already exist.
 dir.create("logs", showWarnings = FALSE, recursive = TRUE)
+dir.create(file.path("data", "working"), showWarnings = FALSE, recursive = TRUE)
 dir.create(file.path("data", "output"), showWarnings = FALSE, recursive = TRUE)
 
 # Confirm the source file exists before doing any work.

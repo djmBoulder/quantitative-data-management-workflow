@@ -2,6 +2,9 @@
 * Purpose: build one complete reproducible workflow from raw synthetic inputs
 * to an analysis-ready dataset, codebook, QA report, workflow memo, and log.
 * Run this do-file from the repository root.
+* Beginner note: if running interactively, run the setup block from version
+* through log using as a block before running later lines. Do not run isolated
+* lines that depend on local macros, tempfiles, imported data, or open logs.
 
 version 17
 clear all
@@ -17,7 +20,7 @@ local analysis_csv "data/output/capstone_analysis_ready_stata.csv"
 local codebook_md "data/output/capstone_codebook_stata.md"
 local qa_report_md "data/output/capstone_qa_report_stata.md"
 local workflow_memo_md "data/output/capstone_workflow_memo_stata.md"
-local log_file "logs/capstone_stata_log.txt"
+local log_file "logs/module-10-stata-log.txt"
 
 * Create output folders if they do not already exist.
 capture mkdir "logs"
@@ -25,7 +28,7 @@ capture mkdir "data/output"
 
 * Start a plain-text log for review.
 capture log close
-log using "`log_file'", text replace
+log using "logs/module-10-stata-log.txt", text replace
 
 display as text "Capstone Stata workflow log"
 
@@ -206,12 +209,13 @@ save `cleaned', replace
 * ---------------------------------------------------------------------------
 
 import delimited using "`region_csv'", clear varnames(1) case(lower) stringcols(_all) bindquote(strict)
-capture rename regionname region_name
+capture rename regionname region_key
+capture rename region_name region_key
 capture rename regionmedianincome region_median_income
+capture rename region_unemploymentrate region_unemployment_rate
 capture rename regionunemploymentrate region_unemployment_rate
 capture rename urbanicityindex urbanicity_index
 capture rename censusdivision census_division
-rename region_name region_key
 replace region_key = lower(trim(region_key))
 replace region_median_income = subinstr(region_median_income, "$", "", .)
 replace region_median_income = subinstr(region_median_income, ",", "", .)

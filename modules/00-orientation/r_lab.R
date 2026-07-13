@@ -1,16 +1,19 @@
 # 00 Orientation R Lab
 # Purpose: confirm that R can see the course repository, read the synthetic
 # teaching data, and write a small setup report.
-# Run this script from the repository root or from an RStudio/Positron project
-# opened at the repository root.
+# Beginner note:
+# - Run this script from the repository root with source("modules/00-orientation/r_lab.R").
+# - If running interactively, run this setup section first so paths and folders exist.
+# - Generated files go only to data/working/, data/output/, or logs/.
 
 # Store project-relative paths in objects.
 synthetic_csv <- file.path("data", "synthetic", "synthetic_gss_like_person_2024.csv")
 log_file <- file.path("logs", "module-00-r-log.txt")
 setup_report <- file.path("data", "output", "module-00-r-setup-check.txt")
 
-# Create ignored output folders if they do not already exist.
+# Create generated-output folders if they do not already exist.
 dir.create("logs", showWarnings = FALSE, recursive = TRUE)
+dir.create(file.path("data", "working"), showWarnings = FALSE, recursive = TRUE)
 dir.create(file.path("data", "output"), showWarnings = FALSE, recursive = TRUE)
 
 # Start a plain-text log. Logs are generated files and are ignored by Git.

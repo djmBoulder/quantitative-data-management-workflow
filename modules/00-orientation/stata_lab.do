@@ -2,6 +2,9 @@
 * Purpose: confirm that Stata can see the course repository, read the
 * synthetic teaching data, and write a small setup report.
 * Run this do-file from the repository root.
+* Beginner note: if running interactively, run the setup block from version
+* through log using as a block before running later lines. Do not run isolated
+* lines that depend on local macros, imported data, or open logs.
 
 version 17
 clear all
@@ -18,7 +21,7 @@ capture mkdir "data/output"
 
 * Start a plain-text log. Logs are generated files and are ignored by Git.
 capture log close
-log using "`log_file'", text replace
+log using "logs/module-00-stata-log.txt", text replace
 
 display as text "Module 00 Stata setup check"
 display as text "Current working directory:"

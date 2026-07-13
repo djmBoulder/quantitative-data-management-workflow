@@ -2,6 +2,9 @@
 * Purpose: import CSV and Excel versions of synthetic_gss_like, inspect them,
 * standardize variable names, and save a clean working copy.
 * Run this do-file from the repository root.
+* Beginner note: if running interactively, run the setup block from version
+* through log using as a block before running later lines. Do not run isolated
+* lines that depend on local macros, imported data, or open logs.
 
 version 17
 clear all
@@ -21,7 +24,7 @@ capture mkdir "data/output"
 
 * Start a plain-text log for the import workflow.
 capture log close
-log using "`log_file'", text replace
+log using "logs/module-02-stata-log.txt", text replace
 
 display as text "Module 02 Stata import log"
 display as text "CSV file: `csv_file'"
@@ -50,7 +53,17 @@ list in 1/5, abbreviate(20)
 
 * Stata may convert spaces and punctuation in raw headers to underscores.
 * Standardize names to the course data dictionary where needed.
+capture rename respondentid respondent_id
+capture rename surveyyear year
 capture rename survey_year year
+capture rename raceethnicity race_ethnicity
+capture rename maritalstatus marital_status
+capture rename employmentstatus employment_status
+capture rename householdincome household_income
+capture rename selfratedhealth self_rated_health
+capture rename physicalactivitydays physical_activity_days
+capture rename surveyweight survey_weight
+capture rename interviewmode interview_mode
 
 * Label the working dataset to document how it entered the project.
 label data "synthetic_gss_like person 2024 imported from CSV for Module 02"
@@ -83,7 +96,17 @@ misstable summarize
 list in 1/5, abbreviate(20)
 
 * Standardize the same name so students see the parallel workflow.
+capture rename respondentid respondent_id
+capture rename surveyyear year
 capture rename survey_year year
+capture rename raceethnicity race_ethnicity
+capture rename maritalstatus marital_status
+capture rename employmentstatus employment_status
+capture rename householdincome household_income
+capture rename selfratedhealth self_rated_health
+capture rename physicalactivitydays physical_activity_days
+capture rename surveyweight survey_weight
+capture rename interviewmode interview_mode
 
 local excel_rows = _N
 local excel_vars = c(k)

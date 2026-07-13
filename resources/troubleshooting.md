@@ -34,6 +34,12 @@ Try:
 3. Check spelling, capitalization, and file extension.
 4. Rerun earlier steps that create the file.
 
+For an R lab, run from the repository root with a command such as:
+
+```r
+source("modules/03-data-documentation/r_lab.R")
+```
+
 ## Package Not Installed
 
 What it may look like in R:

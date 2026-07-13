@@ -3,6 +3,9 @@
 * including datasets, a summary table, a derived codebook, a workflow log,
 * and a handoff memo.
 * Run this do-file from the repository root.
+* Beginner note: if running interactively, run the setup block from version
+* through log using as a block before running later lines. Do not run isolated
+* lines that depend on local macros, imported data, or open logs.
 
 version 17
 clear all
@@ -25,7 +28,7 @@ capture mkdir "data/output"
 
 * Start a plain-text log for review.
 capture log close
-log using "`log_file'", text replace
+log using "logs/module-09-stata-log.txt", text replace
 
 display as text "Module 09 Stata reproducible outputs log"
 display as text "Source file: `source_csv'"

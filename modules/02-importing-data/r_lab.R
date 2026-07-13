@@ -1,7 +1,10 @@
 # 02 Importing and Inspecting Data R Lab
 # Purpose: read CSV and Excel versions of synthetic_gss_like, inspect them,
 # standardize variable names, and save clean working copies.
-# Run this script from the repository root or from an RStudio project at the repository root.
+# Beginner note:
+# - Run this script from the repository root with source("modules/02-importing-data/r_lab.R").
+# - If running interactively, run this setup section first so paths and folders exist.
+# - Generated files go only to data/working/, data/output/, or logs/.
 
 # Store project-relative paths in objects.
 csv_file <- file.path("data", "synthetic", "synthetic_gss_like_person_2024.csv")

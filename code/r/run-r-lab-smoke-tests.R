@@ -3,9 +3,9 @@
 # Instructor-facing QA script for the IBS CU Boulder
 # "Quantitative Data Management and Workflow for Social Scientists" microcredential.
 #
-# By default, this script does a DRY RUN. It discovers module R labs, lists
-# what would be run, checks package availability, and explains how to run labs
-# one by one or all at once.
+# By default, this script does a DRY RUN. It verifies that all 11 expected
+# module R labs are present, lists what would be run, checks package
+# availability, and explains how to run labs one by one or all at once.
 #
 # Dry run:
 #   Rscript code/r/run-r-lab-smoke-tests.R
@@ -19,7 +19,21 @@
 # Smoke tests may create files in data/working/, data/output/, and logs/.
 # Those folders are ignored by Git in this repository.
 
-required_packages <- c(
+expected_modules <- c(
+  "00-orientation",
+  "01-project-workflows",
+  "02-importing-data",
+  "03-data-documentation",
+  "04-cleaning-and-recoding",
+  "05-missing-data",
+  "06-reshaping-data",
+  "07-combining-data",
+  "08-quality-assurance",
+  "09-reproducible-outputs",
+  "10-capstone"
+)
+
+lab_required_packages <- c(
   "dplyr",
   "tidyr",
   "stringr",
@@ -27,8 +41,7 @@ required_packages <- c(
   "readxl",
   "janitor",
   "skimr",
-  "haven",
-  "openxlsx"
+  "haven"
 )
 
 find_repo_root <- function(start = getwd()) {
@@ -68,23 +81,28 @@ selected_module <- if (length(module_arg) == 1) {
 repo_root <- find_repo_root()
 setwd(repo_root)
 
-discover_labs <- function() {
-  lab_paths <- list.files(
+discover_labs <- function(expected_module_dirs) {
+  expected_paths <- file.path("modules", expected_module_dirs, "r_lab.R")
+
+  found_paths <- list.files(
     "modules",
     pattern = "^r_lab[.]R$",
     recursive = TRUE,
     full.names = TRUE
   )
 
-  lab_paths <- lab_paths[grepl("^modules/[^/]+/r_lab[.]R$", lab_paths)]
-  lab_paths <- sort(lab_paths)
+  found_paths <- sort(found_paths[grepl("^modules/[^/]+/r_lab[.]R$", found_paths)])
+  unexpected_paths <- setdiff(found_paths, expected_paths)
 
-  data.frame(
-    module = basename(dirname(lab_paths)),
-    path = lab_paths,
-    exists = file.exists(lab_paths),
+  labs <- data.frame(
+    module = expected_module_dirs,
+    path = expected_paths,
+    exists = file.exists(expected_paths),
     stringsAsFactors = FALSE
   )
+
+  attr(labs, "unexpected_paths") <- unexpected_paths
+  labs
 }
 
 check_required_packages <- function(packages) {
@@ -96,36 +114,49 @@ check_required_packages <- function(packages) {
   )
 }
 
-labs <- discover_labs()
+labs <- discover_labs(expected_modules)
+unexpected_labs <- attr(labs, "unexpected_paths")
 
-if (nrow(labs) == 0) {
-  stop(
-    "No module R labs found. Expected files like modules/00-orientation/r_lab.R.",
-    call. = FALSE
-  )
-}
+missing_labs <- labs[!labs$exists, ]
 
 if (!is.na(selected_module)) {
-  if (!selected_module %in% labs$module) {
+  if (!selected_module %in% expected_modules) {
     stop(
       "Unknown module: ", selected_module, "\n",
-      "Use one of: ", paste(labs$module, collapse = ", "),
+      "Use one of: ", paste(expected_modules, collapse = ", "),
       call. = FALSE
     )
   }
-  labs <- labs[labs$module == selected_module, , drop = FALSE]
 }
 
 cat("\nR lab smoke-test runner\n")
 cat("=======================\n\n")
 cat("Repository root:", repo_root, "\n")
 cat("Mode:", if (run_tests) "RUN" else "DRY RUN", "\n")
+cat("Expected module R labs:", length(expected_modules), "\n")
+cat("Present expected module R labs:", sum(labs$exists), "\n")
+
+if (length(unexpected_labs) > 0) {
+  cat("\nUnexpected module R lab paths found:\n")
+  cat(paste0("  ", unexpected_labs, "\n"), sep = "")
+}
+
+if (nrow(missing_labs) > 0) {
+  cat("\nMissing expected R lab files:\n")
+  print(missing_labs[, c("module", "path")], row.names = FALSE)
+  quit(status = 1)
+}
+
+if (!is.na(selected_module)) {
+  labs <- labs[labs$module == selected_module, , drop = FALSE]
+}
+
 cat("Labs selected:", nrow(labs), "\n\n")
 
-package_results <- check_required_packages(required_packages)
+package_results <- check_required_packages(lab_required_packages)
 missing_packages <- package_results$package[!package_results$installed]
 
-cat("Required package check:\n")
+cat("Module lab package check:\n")
 print(package_results, row.names = FALSE)
 
 if (length(missing_packages) > 0) {
@@ -142,13 +173,6 @@ if (length(missing_packages) > 0) {
   }
 } else {
   cat("\nAll required packages are installed.\n\n")
-}
-
-missing_labs <- labs[!labs$exists, ]
-if (nrow(missing_labs) > 0) {
-  cat("Missing R lab files:\n")
-  print(missing_labs, row.names = FALSE)
-  quit(status = 1)
 }
 
 if (!run_tests) {
@@ -193,7 +217,8 @@ run_one_lab <- function(module, path) {
       ensure_output_dirs()
       withCallingHandlers(
         {
-          sys.source(path, envir = new.env(parent = globalenv()), chdir = FALSE)
+          lab_env <- new.env(parent = globalenv())
+          source(path, local = lab_env, chdir = FALSE)
         },
         warning = function(w) {
           warnings_seen <<- c(warnings_seen, conditionMessage(w))

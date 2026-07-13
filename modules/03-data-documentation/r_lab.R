@@ -1,7 +1,10 @@
 # 03 Data Documentation, Metadata, and Codebooks R Lab
 # Purpose: document synthetic_gss_like with clear names, labels, factors,
 # derived-variable notes, and a small data dictionary.
-# Run this script from the repository root or from an RStudio project at the repository root.
+# Beginner note:
+# - Run this script from the repository root with source("modules/03-data-documentation/r_lab.R").
+# - If running interactively, run this setup section first so paths and folders exist.
+# - Generated files go only to data/working/, data/output/, or logs/.
 
 # Load packages used in this lab.
 if (!requireNamespace("dplyr", quietly = TRUE)) {

@@ -1,7 +1,10 @@
 # 06 Reshaping and Restructuring Data R Lab
 # Purpose: reshape synthetic repeated-measures data from wide to long and
 # back to wide, with row-count and key validation.
-# Run this script from the repository root or from an RStudio project at the repository root.
+# Beginner note:
+# - Run this script from the repository root with source("modules/06-reshaping-data/r_lab.R").
+# - If running interactively, run this setup section first so paths and folders exist.
+# - Generated files go only to data/working/, data/output/, or logs/.
 
 # Load packages used in this lab.
 if (!requireNamespace("dplyr", quietly = TRUE)) {
