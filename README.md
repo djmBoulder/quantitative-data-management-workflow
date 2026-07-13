@@ -2,7 +2,7 @@
 
 This repository contains the curriculum scaffold for the IBS CU Boulder microcredential **Quantitative Data Management and Workflow for Social Scientists**. The microcredential introduces reproducible data management and data wrangling habits for graduate students preparing for quantitative research and methods coursework.
 
-Created by Donald Mather, Statistics Consultant, Computing & Research Services, Institute of Behavioral Science, University of Colorado Boulder, Boulder, Colorado
+Donald Mather, Statistics Consultant, Computing & Research Services, Institute of Behavioral Science, University of Colorado Boulder, Boulder, Colorado
 
 ## For Reviewers
 
