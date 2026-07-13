@@ -26,17 +26,31 @@ clear all
 set more off
 
 * Confirm this do-file is being run from the repository root.
-capture confirm file "AGENTS.md"
+capture confirm file "README.md"
 if _rc {
-    display as error "AGENTS.md not found."
-    display as error "Run this do-file from the repository root."
+    display as error "README.md not found."
+    display as error "Run this do-file from the repository root: the folder containing README.md, modules/, code/, and data/."
     exit 601
 }
 
 capture confirm file "modules/00-orientation/stata_lab.do"
 if _rc {
     display as error "Module Stata labs were not found."
-    display as error "Run this do-file from the repository root."
+    display as error "Run this do-file from the repository root: the folder containing README.md, modules/, code/, and data/."
+    exit 601
+}
+
+capture confirm file "code/stata/create-synthetic-data.do"
+if _rc {
+    display as error "code/stata/create-synthetic-data.do not found."
+    display as error "Run this do-file from the repository root: the folder containing README.md, modules/, code/, and data/."
+    exit 601
+}
+
+capture confirm file "data/synthetic/README.md"
+if _rc {
+    display as error "data/synthetic/README.md not found."
+    display as error "Run this do-file from the repository root: the folder containing README.md, modules/, code/, and data/."
     exit 601
 }
 
@@ -120,9 +134,9 @@ foreach module_id of local modules {
         display as error "Missing lab file: `lab_do'"
     }
     else {
-        * Each module lab opens and closes its own log. capture do lets the
-        * smoke test continue so instructors get a complete pass/fail summary.
-        capture do "`lab_do'"
+        * Each module lab opens and closes its own log. capture noisily lets
+        * the smoke test continue while preserving module log output.
+        capture noisily do "`lab_do'"
         local rc = _rc
 
         * Close any log left open after an unexpected module failure.

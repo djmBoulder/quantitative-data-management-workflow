@@ -11,7 +11,7 @@ Use this checklist from a clean working state when possible. Stata is not always
 - [ ] Operating system recorded:
 - [ ] Repository branch or commit recorded:
 - [ ] Tester name/date recorded:
-- [ ] Test run starts from the repository root.
+- [ ] Test run starts from the repository root: the folder containing `README.md`, `modules/`, `code/`, and `data/`.
 - [ ] Existing generated files in `data/working/`, `data/output/`, and `logs/` are cleared or noted before testing.
 - [ ] Version notes reviewed: `instructor/stata-version-notes.md`.
 
@@ -23,11 +23,12 @@ The repository includes an instructor smoke-test do-file:
 do code/stata/run-stata-lab-smoke-tests.do
 ```
 
-Run it from the repository root after Stata is installed and the synthetic teaching files are present.
+Run it from the repository root after Stata is installed and the synthetic teaching files are present. The repository root is the course folder containing `README.md`, `modules/`, `code/`, and `data/`.
 
 The smoke test:
 
 - runs each module `stata_lab.do` in order,
+- checks stable course files and folders instead of development-only files,
 - lets each module create its normal generated outputs,
 - copies each module log into `logs/stata-smoke-tests/` when possible,
 - writes `logs/stata-smoke-tests/stata-smoke-test-summary.txt`,
@@ -114,7 +115,7 @@ For each lab:
 
 ## Common Stata Smoke-Test Failures
 
-- Wrong working directory.
+- Wrong working directory. Run from the folder containing `README.md`, `modules/`, `code/`, and `data/`.
 - Missing synthetic CSV or Excel file.
 - Excel import unavailable or blocked in the test environment.
 - Log already open from an earlier failed run.

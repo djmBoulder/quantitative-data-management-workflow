@@ -75,7 +75,11 @@ In Stata, type:
 pwd
 ```
 
+<<<<<<< HEAD
 For this course, you usually want the working directory to be the repository root, the course repository folder that contains `README.md`.
+=======
+For this course, you usually want the working directory to be the repository root, the course repository folder that contains `README.md`, `modules/`, `code/`, and `data/`.
+>>>>>>> main
 
 If Stata is looking in the wrong folder, relative paths such as `data/synthetic/synthetic_gss_like_person_2024.csv` will not work.
 
@@ -95,6 +99,8 @@ This means:
 2. Open the `data` folder.
 3. Open the `synthetic` folder.
 4. Read `synthetic_gss_like_person_2024.csv`.
+
+Several Stata do-files check for the course root before they begin. If you see a message about `README.md`, `modules/`, `code/`, or `data/`, use `cd` or Stata's working-directory controls to move to the main course folder and rerun the do-file from the top.
 
 Avoid paths that only work on your computer, such as these example absolute paths:
 

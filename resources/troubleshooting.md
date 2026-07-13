@@ -20,7 +20,7 @@ What it may look like:
 
 Likely causes:
 
-- You are not running the script from the repository root.
+- You are not running the script from the repository root, the folder containing `README.md`, `modules/`, `code/`, and `data/`.
 - The file path is misspelled.
 - The file is in a different folder.
 - The file was not generated yet.
@@ -121,6 +121,8 @@ Try:
 2. Make sure the result is the repository root.
 3. Open the repository folder as your RStudio/Positron project if using R.
 4. In Stata, start from the repository folder before running module do-files.
+
+For Stata labs, the repository-root check looks for stable course files and folders such as `README.md`, `modules/`, `code/`, and `data/`. If the check fails, move to the main course folder and rerun the do-file from the top.
 
 Avoid fixing this by pasting in an absolute path. That may work once but can break reproducibility.
 
@@ -235,7 +237,7 @@ What it may look like:
 
 Try:
 
-1. Confirm Stata is running from the repository root.
+1. Confirm Stata is running from the repository root, the folder containing `README.md`, `modules/`, `code/`, and `data/`.
 2. Run the failing module manually, for example:
 
 ```stata

@@ -9,6 +9,35 @@ version 17
 clear all
 set more off
 
+* Confirm this do-file is being run from the repository root.
+capture confirm file "README.md"
+if _rc {
+    display as error "README.md not found."
+    display as error "Run this do-file from the repository root: the folder containing README.md, modules/, code/, and data/."
+    exit 601
+}
+
+capture confirm file "modules/00-orientation/stata_lab.do"
+if _rc {
+    display as error "modules/00-orientation/stata_lab.do not found."
+    display as error "Run this do-file from the repository root: the folder containing README.md, modules/, code/, and data/."
+    exit 601
+}
+
+capture confirm file "code/stata/create-synthetic-data.do"
+if _rc {
+    display as error "code/stata/create-synthetic-data.do not found."
+    display as error "Run this do-file from the repository root: the folder containing README.md, modules/, code/, and data/."
+    exit 601
+}
+
+capture confirm file "data/synthetic/README.md"
+if _rc {
+    display as error "data/synthetic/README.md not found."
+    display as error "Run this do-file from the repository root: the folder containing README.md, modules/, code/, and data/."
+    exit 601
+}
+
 * Keep paths relative so the workflow works on another computer.
 local csv_dir "data/synthetic"
 local stata_dir "data/synthetic/stata"
