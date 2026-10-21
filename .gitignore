@@ -1,0 +1,34 @@
+# Data folders
+data/raw/*
+!data/raw/README.md
+data/working/*
+!data/working/README.md
+data/output/*
+!data/output/README.md
+data/synthetic/stata/
+
+# Logs
+logs/
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Stata backup and temporary files
+*.bak
+*.stswp
+*.smcl
+
+# R project history and session files
+.Rhistory
+.RData
+.Ruserdata
+.Rproj.user/
+
+# System files
+.DS_Store
+Thumbs.db

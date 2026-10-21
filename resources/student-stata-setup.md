@@ -1,0 +1,201 @@
+# Student Stata Setup Guide
+
+This guide is for students who are new to Stata or who have never run a Stata do-file before. You do not need to be an expert before starting the course. The goal is to learn a repeatable workflow one small step at a time.
+
+## What Stata Does In This Course
+
+In this microcredential, Stata is used to:
+
+- import synthetic teaching data,
+- inspect variables,
+- clean and recode data,
+- check missing values,
+- reshape and combine files,
+- write logs,
+- and save working or analysis-ready datasets.
+
+You will usually work by running a `.do` file. A do-file is a plain-text script that stores Stata commands in the order you want them to run.
+
+## Opening Stata
+
+The labs use `version 17` compatibility settings and require Stata 17 or later. Stata requires a license; use your own installation or the access provided for your course.
+
+If Stata is installed on your computer:
+
+1. Open Stata from your Applications folder, Start menu, or desktop shortcut.
+2. Look for the main Stata windows: Results, Command, Variables, and Review.
+3. Open the Do-file Editor from Stata's menu or toolbar.
+
+If Stata is available only through a campus lab or remote system:
+
+1. Follow your instructor's instructions for logging into the lab or remote desktop.
+2. Open Stata inside that environment.
+3. Make sure the course repository is available in the remote environment.
+4. If the repository is not available, ask your instructor where course files should be stored.
+
+Do not move course data into personal cloud folders unless your instructor tells you to. The course uses synthetic data, but the habit of storing data carefully matters.
+
+## Opening A Do-File
+
+A Stata do-file ends in `.do`.
+
+Examples in this course:
+
+- `modules/00-orientation/stata_lab.do`
+- `modules/01-project-workflows/stata_lab.do`
+- `modules/10-capstone/stata_lab.do`
+
+To open a do-file:
+
+1. Open Stata.
+2. Open the Do-file Editor.
+3. Use File > Open to find the `.do` file.
+4. Read the comments at the top before running the file.
+
+Comments in Stata often begin with `*` or `//`. Comments explain the code but do not run as commands.
+
+## Running A Do-File
+
+You can run a do-file from the Do-file Editor by clicking the run button. Your instructor may also show you how to run selected lines.
+
+For this course, it is often best to run the full do-file from top to bottom. Running only the middle of a do-file can cause errors if earlier lines created folders, imported data, or opened logs.
+
+If something fails:
+
+1. Read the error message.
+2. Look at the line that ran just before the error.
+3. Check your working directory with `pwd`.
+4. Ask whether Stata can find the file path shown in the code.
+
+## Checking The Current Working Directory
+
+The working directory is the folder where Stata is currently looking for files.
+
+In Stata, type:
+
+**Stata:**
+
+```stata
+* Stata: Checking The Current Working Directory.
+pwd
+```
+
+For this course, you usually want the working directory to be the repository root, the course repository folder that contains `README.md`, `modules/`, `code/`, and `data/`.
+
+If Stata is looking in the wrong folder, relative paths such as `data/synthetic/synthetic_gss_like_person_2024.csv` will not work. Use **File > Change Working Directory** to select the downloaded course folder containing `README.md`, `modules/`, and `data/`, then check `pwd` again. Opening a do-file does not necessarily change the working directory.
+
+## Relative Paths
+
+A relative path starts from the project folder instead of from your whole computer.
+
+Example:
+
+**Stata:**
+
+```stata
+* Stata: Relative Paths.
+import delimited "data/synthetic/synthetic_gss_like_person_2024.csv", clear
+```
+
+This means:
+
+1. Start in the repository root.
+2. Open the `data` folder.
+3. Open the `synthetic` folder.
+4. Read `synthetic_gss_like_person_2024.csv`.
+
+Several Stata do-files check for the course root before they begin. If you see a message about `README.md`, `modules/`, `code/`, or `data/`, use `cd` or Stata's working-directory controls to move to the main course folder and rerun the do-file from the top.
+
+Avoid paths that only work on your computer. For example, do not put either of these OS-specific commands in a submitted do-file.
+
+**Stata on macOS:**
+
+```stata
+* Avoid: this absolute path is tied to one macOS account.
+import delimited "/Users/yourname/Documents/course-repository/data/synthetic/synthetic_gss_like_person_2024.csv", clear
+```
+
+**Stata on Windows:**
+
+```stata
+* Avoid: this absolute path is tied to one Windows account.
+import delimited "C:/Users/yourname/Documents/course-repository/data/synthetic/synthetic_gss_like_person_2024.csv", clear
+```
+
+Stata accepts forward slashes on Windows, which makes the path easier to compare with the macOS version.
+
+## Log Files
+
+A log file records what happened when your Stata script ran. Logs are useful because they show commands, output, warnings, and errors.
+
+Many Stata labs begin with a command like:
+
+**Stata:**
+
+```stata
+* Stata: Log Files.
+log using "logs/module-01-stata-log.txt", text replace
+```
+
+And end with:
+
+**Stata:**
+
+```stata
+* Stata: Log Files.
+log close
+```
+
+If Stata says a log is already open, type:
+
+**Stata:**
+
+```stata
+* Stata: Log Files.
+capture log close
+```
+
+Then rerun the script from the top.
+
+## Where Stata Outputs Go
+
+Course Stata labs usually write generated files to:
+
+- `logs/`
+- `data/working/`
+- `data/output/`
+
+These folders are ignored by Git. Keep generated data and logs out of GitHub. Upload requested setup evidence to Canvas.
+
+## First Setup Check
+
+Start with Module 00:
+
+1. Open Stata.
+2. Open `modules/00-orientation/stata_lab.do`.
+3. Run the full do-file.
+4. Check that Stata found `data/synthetic/synthetic_gss_like_person_2024.csv`.
+5. Check that the lab created:
+   - `logs/module-00-stata-log.txt`
+   - `data/output/module-00-stata-setup-check.txt`
+
+If this works, your Stata setup is ready for the first module.
+
+## When To Ask For Help
+
+Ask for help if:
+
+- you cannot access Stata,
+- you cannot find the repository folder,
+- `pwd` shows a folder you do not recognize,
+- Stata says a file is not found,
+- Stata cannot write to `logs/` or `data/output/`,
+- or a do-file fails even after you rerun it from the top.
+
+When asking for help, include:
+
+- the module number,
+- the do-file name,
+- the error message,
+- what `pwd` shows,
+- and the line where the script stopped.
